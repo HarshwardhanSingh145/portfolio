@@ -1,0 +1,24 @@
+<svg width="195" height="65" viewBox="0 0 195 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @font-face {
+        font-family: 'Media Sans Semicondensed';
+        src: url('/cdn.prod.website-files.com/61dd9ddd76c6a058a47a4c57/61dda8782d6530778e4343c5_mediasanssemicondensed-bold-TRIAL.otf') format('opentype');
+      }
+      .brand-text {
+        font-family: 'Media Sans Semicondensed', 'Arial Black', Impact, sans-serif;
+        font-size: 42px;
+        font-weight: 900;
+        letter-spacing: -0.01em;
+        text-transform: none;
+      }
+    </style>
+  </defs>
+  <!-- Accent orange rings above the W -->
+  <g transform="translate(8, 2)">
+    <circle cx="6" cy="6" r="4.5" stroke="#FDA228" stroke-width="1.5" fill="none"/>
+    <circle cx="11" cy="6" r="4.5" stroke="#FDA228" stroke-width="1.5" fill="none"/>
+  </g>
+  <!-- Vardhan text -->
+  <text x="0" y="56" class="brand-text" fill="#FFFFFF">Vardhan<tspan fill="#FC3E6B">.</tspan></text>
+</svg>

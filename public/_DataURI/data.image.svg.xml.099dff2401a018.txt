@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 12 12"><path d="M 10.769 9.03 L 10.769 1.385 L 3.132 1.385 L 3.132 2.714 L 8.514 2.714 L 1.537 9.683 L 2.47 10.615 L 9.445 3.646 L 9.445 9.03 Z" fill="rgb(244, 241, 238)"></path></svg>

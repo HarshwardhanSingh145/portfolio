@@ -1,0 +1,12 @@
+{
+  "name": "vardhan-portfolio",
+  "version": "1.0.0",
+  "description": "Harshwardhan Singh (Vardhan.) - AI/ML Engineer & Web Designer Portfolio",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["portfolio", "ai-ml", "web-developer", "webflow", "framer"],
+  "author": "Harshwardhan Singh",
+  "license": "ISC"
+}
