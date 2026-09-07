@@ -983,7 +983,7 @@
         }
       }
 
-      /* Mobile adjustment: match laptop alignment and position buttons at bottom */
+      /* Mobile adjustment: restore original text sizing behind photo and position buttons at bottom */
       @media only screen and (max-width: 767px) {
         .section.is--intro {
           height: 100vh !important;
@@ -1008,55 +1008,33 @@
           box-sizing: border-box !important;
         }
         .intro__content-wrapper {
-          margin-top: -14vh !important;
+          margin-top: -6vh !important;
+          margin-bottom: 0 !important;
           text-align: center !important;
           position: relative !important;
           z-index: 2 !important;
           width: 100% !important;
-          transform: none !important;
+          transform: scale(0.95) !important;
+          transform-origin: center center !important;
         }
         .intro__text.is--first {
           display: block !important;
           position: relative !important;
           z-index: 15 !important;
-          margin-bottom: 2.2rem !important;
+          margin-bottom: 1.5rem !important;
           font-size: 14px !important;
           text-align: center !important;
           white-space: nowrap !important;
-          transform: none !important;
-          top: 0 !important;
-        }
-        .heading-outline__wrapper {
-          position: relative !important;
-        }
-        .intro__link-web,
-        .intro__link-photo,
-        .intro__link.is--first,
-        .intro__link.is--second {
-          font-size: clamp(52px, 15vw, 72px) !important;
-          line-height: 1.05 !important;
-          white-space: nowrap !important;
-          display: inline-block !important;
-          letter-spacing: -0.03em !important;
-        }
-        .heading-outline.is--first,
-        .intro__title,
-        .heading-outline,
-        .heading-xl {
-          line-height: 1.05 !important;
-        }
-        .intro__bottom-text {
-          display: none !important;
         }
         .intro__photo {
           position: absolute !important;
-          bottom: 14vh !important;
+          bottom: 10vh !important;
           left: 50% !important;
           transform: translateX(-50%) !important;
           width: auto !important;
           max-width: 88vw !important;
-          height: 60vh !important;
-          max-height: 520px !important;
+          height: 58vh !important;
+          max-height: 500px !important;
           object-fit: contain !important;
           object-position: bottom center !important;
           z-index: 3 !important;
