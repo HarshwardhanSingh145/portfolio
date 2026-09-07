@@ -879,10 +879,45 @@
         }
       });
 
+      let isMobileRevealed = false;
+      function toggleMobileHeroAnimation() {
+        const linkPhoto = document.querySelector(".intro__link-photo");
+        const linkWeb = document.querySelector(".intro__link-web");
+        isMobileRevealed = !isMobileRevealed;
+        if (linkPhoto) {
+          const eventType = isMobileRevealed ? "mouseenter" : "mouseleave";
+          linkPhoto.dispatchEvent(new MouseEvent(eventType, { bubbles: true, cancelable: true }));
+          linkPhoto.dispatchEvent(new MouseEvent(isMobileRevealed ? "mouseover" : "mouseout", { bubbles: true, cancelable: true }));
+        }
+        if (linkWeb) {
+          if (isMobileRevealed) {
+            linkWeb.classList.add("is--outline-text");
+          } else {
+            linkWeb.classList.remove("is--outline-text");
+          }
+        }
+      }
+
       $(function () {
         $(
           ".photos__single--link, .intro__link-web, .intro__link-photo, .intro__link, .nav__item, .inner--link, .inner-link, .nav__item--wrapper, .is-transition, a[href='/design'], a[href='/contact']"
         ).click(function (e) {
+          // On mobile, clicking hero text links should trigger the animation, NOT page navigation!
+          if (window.innerWidth <= 767 && $(this).closest('.section.is--intro').length) {
+            // If it's one of the bottom CTA buttons (.cta__mobile), allow navigation
+            if ($(this).hasClass('cta__mobile')) {
+              e.preventDefault();
+              var goTo = this.getAttribute('href') || '/design';
+              triggerForward(goTo);
+              return;
+            }
+            // Otherwise, it is hero text/link - do not navigate, trigger animation instead
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMobileHeroAnimation();
+            return;
+          }
+
           e.preventDefault();
           var goTo = this.getAttribute('href') || '/design';
           if (!goTo || goTo === '#' || goTo.startsWith('#')) {
@@ -899,14 +934,20 @@
         }
       }, { passive: true });
 
-      // Mobile touch swipe up transitions forward to design
+      // Mobile touch swipe up transitions forward to design (only outside hero section)
       var touchY = 0;
+      var touchInHero = false;
       window.addEventListener('touchstart', function (e) {
         touchY = e.touches[0].clientY;
+        touchInHero = !!e.target.closest('.section.is--intro');
       }, { passive: true });
       window.addEventListener('touchend', function (e) {
+        // Prevent accidental swipe forward on mobile while in hero section
+        if (touchInHero && window.innerWidth <= 767) {
+          return;
+        }
         var diff = touchY - e.changedTouches[0].clientY;
-        if (diff > 60) {
+        if (diff > 120) {
           triggerForward('/design');
         }
       }, { passive: true });
@@ -940,30 +981,18 @@
           });
         });
 
-        // Mobile tap/touch on portrait to reveal animation
-        const introPhoto = document.querySelector(".intro__photo");
-        const linkPhoto = document.querySelector(".intro__link-photo");
-        const linkWeb = document.querySelector(".intro__link-web");
-        let isMobileRevealed = false;
-
-        if (introPhoto) {
-          introPhoto.addEventListener("click", function (e) {
+        // Mobile tap/touch anywhere on hero portrait or hero section to toggle animation without navigating
+        const heroSection = document.querySelector(".section.is--intro");
+        if (heroSection) {
+          heroSection.addEventListener("click", function (e) {
             if (window.innerWidth <= 767) {
+              // If clicked on bottom buttons or navigation, let them handle their own action
+              if (e.target.closest('.intro__buttons') || e.target.closest('.nav')) {
+                return;
+              }
               e.preventDefault();
               e.stopPropagation();
-              isMobileRevealed = !isMobileRevealed;
-              if (linkPhoto) {
-                const eventType = isMobileRevealed ? "mouseenter" : "mouseleave";
-                linkPhoto.dispatchEvent(new MouseEvent(eventType, { bubbles: true, cancelable: true }));
-                linkPhoto.dispatchEvent(new MouseEvent(isMobileRevealed ? "mouseover" : "mouseout", { bubbles: true, cancelable: true }));
-              }
-              if (linkWeb) {
-                if (isMobileRevealed) {
-                  linkWeb.classList.add("is--outline-text");
-                } else {
-                  linkWeb.classList.remove("is--outline-text");
-                }
-              }
+              toggleMobileHeroAnimation();
             }
           });
         }
